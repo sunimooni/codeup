@@ -91,9 +91,40 @@ _1.2 Prim Algorithm
 .단일 출발지 -> 모든 종점(간선의 길이가 양수일 경우만)
 
 _2.1 Dijkstra Algorithm
-[출발점 v를 포함하여]
-
-
+.시간복잡도 : O(n^2)
+.출발점 v를 포함하여 최단경로 발견된 정점 집합 S
+.정점 w가 S에 속하지 않을 때, dist[w]를 v에서 시작하여 S의 정점들만을 거쳐 w까지의 최단경로
+.다음으로 짧은 최단 경로가 정점 u까지의 경로라면 v에서 u로의 경로는 오직 S 속한 정점 통한다
+.v ~ u 는 최단경로, u는 S의 원소가 된다.
+.v ~ u ~ w 와 v ~ w 비교하여 작은 것으로 dist[w] 갱신 필요.
+.dist[w] = min{dist[w], dist[u]+length[u,w]}
+{
+	int s[i] // 방문 여부
+	int dist[j] // n개의 정점을 가진 방향 그래프에서, 정점 v로부터 정점 j까지 최소
+	int length[j][j] // 간선의 길이
+	void ShortestPath(int n, int v){
+		// 초기화 과정
+		for(int i = 0; i < n; i++){
+			s[i] = false;
+			dist[i] = length[v][i];
+		}
+		//방문 표시
+		s[v] = true;
+		dist[v] = 0;
+		
+		for(int i = 0; i < n-2; i++){
+			int u = choose(n); // dist[w]가 최소가 되는 점 u 반환
+			s[u] = true; // u 방문
+			for(int w = 0; w < n; w++){
+				if(!s[w]){ // w는 방문 안한상태
+					// u를 방문한게 더 비용 작으면 대체
+					if(dist[u] + length[u][w] < dist[w])
+						dist[w] = dist[u] + length[u][w];	
+				}	
+			}
+		}
+	}
+}
 
 
 
