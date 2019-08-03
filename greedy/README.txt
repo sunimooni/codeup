@@ -126,6 +126,67 @@ _2.1 Dijkstra Algorithm
 	}
 }
 
+3. Huffman Coding (최적 합병 패턴)
+.햡병은 두개의 정렬된 리스트를 하나의 큰 정렬된 리스트로 만드는 작업이다. m,n 리스트 합병 시간은 O(m+n)
+.여러개의 정렬된 리스트들을 둘씩 쌍으로 묶어 계속적으로 합병해서 전체적인 합병 이룰 수 있다.
+.합병 순서에 따라 전체 합병 시간이 달라질 수 있다. -> n개의 정렬된 파일을 합병할 때 가장 적은 시간 소요 찾기.
+.전략 : 가장 작은 크기의 파일들을 먼저 합병한다.
+
+_3.1이진합병트리
+..가중외부경로길이: sum(d*q) [d는 루트노드에서 파일 x의 외부 노드까지의 거리, q는 파일길이]
+..가중외부경로길이는 이진 합병트리에 대한 레코드 이동의 총수와 같다.(총 합병 시간)
+..최소 가중외부경로길이를 갖는 것[Huffman Code]
+..시간복잡도 : 배열 O(n^2), 최소 히프 처리시 O(nlogn)
+struct treenode{
+	struct treenode *lchild, *rchild;
+	int weight;
+};
+typedef struct treenode Type;
+Type* tree(int n){
+	// n은 리스트 원소 개수
+	for(int i = 1; i < n; i++){
+		Type *pt = new Type;
+		
+		// list에서 제일 작은 두개
+		pt -> lchild = Least(list)
+		pt -> rchild = Least(list)
+		// 두개 합병한 거
+		pt -> weight = (pt->lchild) -> weight + (pt->rchild) -> weight;
+		// 리스트에 추가
+		insert(list, *pt);
+	}
+	return (least(list));
+}
+
+_3.2 Huffman code
+.최소 가중외부경로길이를 갖는 이진트리를 메세지에 대한 최적의 코드집합을 얻는데 이용.
+.코드(code) 메세지 전달을 위해 사용되는 이진문자열. 복호트리를 사용하여 해독.
+
+4. Knapsack Problem(배낭 문제)
+.유형 : n개의 물건, 1개의 배낭, 물건 i의 무게 Wi, 물건 i의 일부분 Xi를 배낭에 넣으면 Pi*Xi의 이익을 얻는다. 배낭의 용량이 m일 때, 최대 이익을 취하는 방향.
+.[p는 이익, w는 무게, x는 비율, 총량은 m]
+.단위 용량 당 최대 이익을 갖는 물건을 우선시한다. pi/wi 값이 큰 것을 먼저 고려.
+.시간 복잡도: O(nlogn)
+
+기준 : pi/wi가 큰 순으로 입력.
+public void GreedyKnapsack(float m, int n){
+	// 초기화
+	for(int i = 1; i <= n; i++)
+		x[i]= 0.0;
+	float U = m; // 배낭 용량
+	for(int i = 1; i <= n; i++){
+		if(w[i] > U) break;
+		x[i] = 1.0;
+		U -= w[i];
+	}
+	if(i <= n) x[i] = U/w[i];
+}
+
+※ 0,1 배낭문제는 다른 기준으로.
+
+5. Tree Vertex Splitting Problem[TVSP] 트리 정점분할
+
+
 
 
 
