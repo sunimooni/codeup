@@ -182,7 +182,7 @@ public void GreedyKnapsack(float m, int n){
 	if(i <= n) x[i] = U/w[i];
 }
 
-※ 0,1 배낭문제는 다른 기준으로.
+※ 0,1 배낭문제는 다른 기준으로. ex 가장 큰 이익, 용량 천천히 채우기 등등
 
 5. Tree Vertex Splitting Problem[TVSP] 트리 정점분할
 
